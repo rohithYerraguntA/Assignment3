@@ -1,0 +1,21 @@
+trigger:
+  branches:
+    include:
+      - master
+
+variables:
+  azureContainerRegistry: 'yerraguntaacr.azurecr.io'
+  imageName: 'yerragunta-flask'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'yerraguntaacr'  # This should match your service connection name in Azure DevOps
+    repository: '$(imageName)'
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    tags: |
+      latest
