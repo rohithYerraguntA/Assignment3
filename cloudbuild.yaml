@@ -3,14 +3,14 @@ steps:
     args: [
       'build',
       '-t',
-      'us-central1-docker.pkg.dev/DC-lab-sem-2/yerragunta-repo/yerragunta-flask:latest',
+      'us-central1-docker.pkg.dev/dc-lab-sem-2/yerragunta-repo/yerragunta-flask:latest',
       '.'
     ]
 
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'us-central1-docker.pkg.dev/DC-lab-sem-2/yerragunta-repo/yerragunta-flask:latest'
+      'us-central1-docker.pkg.dev/dc-lab-sem-2/yerragunta-repo/yerragunta-flask:latest'
     ]
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -20,7 +20,7 @@ steps:
       'deploy',
       'yerragunta-flask',
       '--image',
-      'us-central1-docker.pkg.dev/DC-lab-sem-2/yerragunta-repo/yerragunta-flask:latest',
+      'us-central1-docker.pkg.dev/dc-lab-sem-2/yerragunta-repo/yerragunta-flask:latest',
       '--region',
       'us-central1',
       '--platform',
@@ -29,7 +29,7 @@ steps:
     ]
 
 images:
-  - 'us-central1-docker.pkg.dev/DC-lab-sem-2/yerragunta-repo/yerragunta-flask:latest'
+  - 'us-central1-docker.pkg.dev/dc-lab-sem-2/yerragunta-repo/yerragunta-flask:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
