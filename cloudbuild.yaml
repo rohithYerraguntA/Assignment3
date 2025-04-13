@@ -1,0 +1,35 @@
+steps:
+  # Step 1: Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t',
+      'us-central1-docker.pkg.dev/DC-lab-sem-2/yerragunta-repo/yerragunta-flask:latest',
+      '.'
+    ]
+
+  # Step 2: Push Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'us-central1-docker.pkg.dev/DC-lab-sem-2/yerragunta-repo/yerragunta-flask:latest'
+    ]
+
+  # Step 3: Deploy to Cloud Run (with public access)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: [
+      'run',
+      'deploy',
+      'yerragunta-flask',
+      '--image',
+      'us-central1-docker.pkg.dev/DC-lab-sem-2/yerragunta-repo/yerragunta-flask:latest',
+      '--region',
+      'us-central1',
+      '--platform',
+      'managed',
+      '--allow-unauthenticated'
+    ]
+
+images:
+  - 'us-central1-docker.pkg.dev/DC-lab-sem-2/yerragunta-repo/yerragunta-flask:latest'
